@@ -1,0 +1,18 @@
+@mixin myFlex($jc: space-between, $ai: center, $gap: 30px) {
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+    gap: $gap;
+}
+
+// html,
+// body {
+//     overflow-x: hidden;
+//     max-width: 100%;
+// }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

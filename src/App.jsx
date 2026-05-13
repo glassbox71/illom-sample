@@ -1,0 +1,170 @@
+import { useEffect, useState } from 'react'
+import './App.css'
+import './App.scss'
+
+import NotFound from './pages/NotFound'
+
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+import LoadingScreen from './components/LoadingScreen'
+import Home from './components/Home'
+import Login from './components/Login'
+import Member from './components/Member'
+import { useProductStore } from './store/useProductStore'
+import Magazine from './pages/Magazine'
+import Series from './pages/Series'
+import StoreInfo from './pages/StoreInfo'
+import Notice from './pages/Notice'
+import CompanyInfo from './pages/CompanyInfo'
+import Footer from './components/Footer'
+import ContentDetailPage from './pages/ContentDetailPage'
+import ScrollTop from './components/ScrollTop'
+import Cart from './pages/Cart'
+import CompanyPage from './pages/CompanyPage'
+import QuickMenu from './components/QuickMenu'
+import Order from './pages/Order'
+import MyPage from './pages/MyPage'
+import { useAuthStore } from './store/useAuthStore'
+import LeavePage from './pages/LeavePage'
+import Search from './components/Search'
+import OAuth from './pages/OAuth'
+import SubPage from './pages/SubPage'
+import SearchPage from './pages/SearchPage'
+import NaverCallback from './pages/NaverCallback'
+import ProductDetail from './pages/ProductDetail'
+import WishList from './pages/WishList'
+import SeriesDetail from './pages/SeriesDetail.jsx'
+import NewBestPage from './pages/NewBestPage'
+import Charge from './pages/Charge'
+import FurniturePage from './components/FurniturePage'
+import OrderForGuest from './pages/OrderForGuest'
+import DockTab from './components/DockTab'
+import StickyBanner from './components/StickyBanner'
+import InquiryPage from './pages/InquiryPage'
+import { AnimatePresence } from 'framer-motion'
+import PageTransition from './components/PageTransition'
+import MyPageLayout from './pages/MyPageLayout'
+import { useCustomWishStore } from './store/useCustomWishStore'
+import Header from './components/Header'
+import ComparePage from './pages/ComparePage'
+import CompareBar from './components/CompareBar'
+import Configurator from './pages/Configurator.jsx'
+
+
+function App() {
+  const [isLoading, setIsLoading] = useState(true)
+  const { onfetchItems, onMakeMenu, fetchWishlist, clearWishlist } = useProductStore()
+  const { fetchWishFolders, clearWishFolders } = useCustomWishStore()
+  const { initAuth, user } = useAuthStore()
+  const location = useLocation()
+  const [bannerVisible, setBannerVisible] = useState(true)
+
+  useEffect(() => {
+    onfetchItems()
+    onMakeMenu()
+    initAuth()
+  }, [])
+
+  useEffect(() => {
+    if (user) {
+      fetchWishlist(user)
+      fetchWishFolders(user)
+    } else {
+      clearWishlist()
+      clearWishFolders()
+    }
+  }, [user])
+
+  const handleFinish = () => {
+    setIsLoading(false)
+    window.__appLoaded = true
+  }
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--banner-height',
+      bannerVisible ? '40px' : '0px'
+    )
+  }, [bannerVisible])
+
+  return (
+    <>
+      {isLoading && <LoadingScreen onFinish={handleFinish} />}
+
+      <ScrollTop />
+      <StickyBanner onClose={() => setBannerVisible(false)} />
+      <Header />
+
+      <div style={{ flex: 1, alignItems: 'flex-start' }}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+            <Route path="/search" element={<PageTransition><Search /></PageTransition>} />
+            <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+            <Route path="/member" element={<PageTransition><Member /></PageTransition>} />
+            <Route path="/cart" element={<PageTransition><Cart /></PageTransition>} />
+            <Route path="/charge" element={<PageTransition><Charge /></PageTransition>} />
+            <Route path="/orderForGuest/:orderNum" element={<PageTransition><OrderForGuest /></PageTransition>} />
+            <Route path="/searchpage" element={<PageTransition><SearchPage /></PageTransition>} />
+            <Route path="/oauth" element={<PageTransition><OAuth /></PageTransition>} />
+            <Route path="/magazine" element={<PageTransition><Magazine /></PageTransition>} />
+            <Route path="/magazine/:id" element={<PageTransition><ContentDetailPage /></PageTransition>} />
+            <Route path="/series" element={<PageTransition><Series /></PageTransition>} />
+            <Route path="/series/:slug" element={<PageTransition><SeriesDetail /></PageTransition>} />
+            <Route path="/store-info" element={<PageTransition><StoreInfo /></PageTransition>} />
+            <Route path="/notice" element={<PageTransition><Notice /></PageTransition>} />
+            <Route path="/company-info" element={<PageTransition><CompanyInfo /></PageTransition>} />
+            <Route path="/companypage" element={<PageTransition><CompanyPage /></PageTransition>} />
+            <Route path="/naver-callback" element={<PageTransition><NaverCallback /></PageTransition>} />
+            <Route path="/product/:id" element={<PageTransition><ProductDetail /></PageTransition>} />
+            <Route path="/furniturepage" element={<PageTransition><FurniturePage /></PageTransition>} />
+            <Route path="/new" element={<PageTransition><NewBestPage /></PageTransition>} />
+            <Route path="/BestSeller" element={<PageTransition><NewBestPage /></PageTransition>} />
+            <Route path="/customize" element={<Configurator />} />
+            <Route path="/compare" element={<ComparePage />} />
+
+            {/* 마이페이지 레이아웃 */}
+            <Route path="/" element={<PageTransition><MyPageLayout /></PageTransition>}>
+              <Route path="/order" element={<Order />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/wishlist" element={<WishList />} />
+              <Route path="/inquiry" element={<InquiryPage />} />
+              <Route path="/leavepage" element={<LeavePage />} />
+            </Route>
+
+            {/* 카테고리 서브페이지 */}
+            <Route path="/:originalCategory" element={<PageTransition><SubPage /></PageTransition>} />
+            <Route path="/:originalCategory/:category2" element={<PageTransition><SubPage /></PageTransition>} />
+            <Route path="/:originalCategory/:category2/:category3" element={<PageTransition><SubPage /></PageTransition>} />
+
+            <Route path="/not-found" element={<PageTransition><NotFound /></PageTransition>} />
+            <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+          </Routes>
+        </AnimatePresence>
+      </div>
+
+      <QuickMenu />
+      <DockTab />
+      <CompareBar />
+      <Footer />
+
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 1800,
+          style: {
+            borderRadius: '999px',
+            background: '#111',
+            color: '#fff',
+            padding: '12px 18px',
+            fontSize: '14px',
+            fontWeight: 600,
+          },
+        }}
+      />
+    </>
+  )
+
+}
+
+export default App

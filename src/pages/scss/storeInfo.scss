@@ -1,0 +1,372 @@
+.store-info-wrap {
+    margin-top: 60px;
+
+    .inner {
+        max-width: none;
+        width: 100%;
+    }
+
+}
+
+.store-info-title {
+    color: black;
+    font-size: 24px;
+    text-align: center;
+    padding: 16px 0;
+}
+
+.store-info-main {
+    position: relative;
+    min-height: 760px;
+
+    .store-map {
+        position: relative;
+        width: 100%;
+        min-height: 760px;
+        height: min(760px, calc(100vh - 160px));
+    }
+}
+
+.store-region-quick {
+    position: absolute;
+    top: 16px;
+    left: 472px;
+    right: 16px;
+    z-index: 9;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    pointer-events: none;
+
+    button {
+        appearance: none;
+        min-width: 46px;
+        height: 31px;
+        padding: 0 12px;
+        border: 1px solid rgba(30, 30, 30, 0.14);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.94);
+        color: #222;
+        font-size: 13px;
+        font-weight: 500;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        pointer-events: auto;
+        transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    button:hover,
+    button.is-active {
+        border-color: #111;
+        background: #111;
+        color: #fff;
+    }
+}
+
+.store-control {
+    width: 440px;
+    max-width: calc(100% - 32px);
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 10;
+    background: #fff;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+
+
+    .control-header {
+        //background: yellow;
+        //position: fixed;
+        position: relative;
+        box-shadow: 0 3px 5px rgb(0, 0, 0, 0.16);
+    }
+
+    .control-body {
+        //background: greenyellow;
+        height: min(560px, calc(100vh - 260px));
+        min-height: 420px;
+        overflow: hidden;
+        transition: height 0.3s ease, min-height 0.3s ease;
+        //overflow: scroll;
+    }
+
+    &.is-list-closed {
+        .control-body {
+            height: 0;
+            min-height: 0;
+        }
+    }
+
+}
+
+.control-toggle {
+    appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+    border: 0;
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    background: #fff;
+    color: #222;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.control-toggle:hover {
+    background: #f6f6f6;
+}
+
+.control-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #222;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.tab {
+    display: flex;
+    justify-content: space-evenly;
+    //z-index: 10;
+    font-size: 16px;
+
+    li {
+        width: 100%;
+        text-align: center;
+        position: relative;
+        padding: 16px 0;
+    }
+}
+
+.tab_active {
+    // color: blue;
+    //background: greenyellow;
+    //text-decoration: underline 1px black;
+    position: relative;
+    background: black;
+    transition: 0.5s;
+
+    a {
+        color: white;
+    }
+
+    a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        /* Adjust distance from text */
+        width: 100%;
+        /* Full width of the parent */
+        height: 2px;
+        /* Thickness of underline */
+        background-color: black;
+        //transition: width 0.3s ease;
+        /* Smooth transition */
+    }
+
+}
+
+.store-control-search-section {
+    // z-index: 0;
+    margin-top: 2px;
+}
+
+//input 커스텀
+.keyword-search {
+    position: relative;
+
+    .keyword {
+        outline: none;
+        width: 100%;
+        height: 48px;
+        border-style: none;
+        padding-left: 16px;
+        background: rgb(243, 243, 243);
+        font-size: 14px;
+    }
+
+    .keyword:focus {
+        //background: #dedede;
+        border: 1px solid #bababa;
+    }
+
+    .k_search_btn {
+        appearance: none;
+        border-style: none;
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+}
+
+.location {
+    display: flex;
+    width: 100%;
+    //background: #ddd;
+    justify-content: space-evenly;
+    padding: auto 0;
+
+}
+
+/* 큰 데스크탑 */
+// @media (max-width: 1440px) {
+//     .store-info-main {
+//         display: flex;
+//         flex-direction: column;
+
+//         .store-map {
+//             //background: bisque;
+//             // flex: 1;
+//             // min-height: 500px;
+//             // height: 700px;
+//         }
+//     }
+// }
+
+/* 일반 노트북 */
+@media (max-width: 1200px) {}
+
+/* 작은 노트북 / 태블릿 가로 */
+@media (max-width: 1024px) {
+    .store-info-main {
+        display: flex;
+        flex-direction: column;
+        min-height: auto;
+
+        .store-map {
+            order: 1;
+            height: 560px;
+            min-height: 560px;
+        }
+    }
+
+    .store-region-quick {
+        top: 16px;
+        left: 16px;
+        right: 16px;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        button {
+            flex: 0 0 auto;
+        }
+    }
+
+    .store-control {
+        order: 2;
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 16px;
+        box-shadow: none;
+
+        .control-body {
+            height: min(416px, 58vh);
+            min-height: 256px;
+            overflow: hidden;
+            transition: height 0.3s ease, min-height 0.3s ease;
+        }
+
+        &.is-list-closed {
+            .control-body {
+                height: 0;
+                min-height: 0;
+                overflow: hidden;
+            }
+        }
+    }
+
+    .location {
+        gap: 12px;
+        padding: 0 12px;
+
+        .selector {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .drop-down-wrap {
+            width: 100%;
+
+            .select-wrap {
+                width: 100%;
+            }
+        }
+    }
+}
+
+/* 태블릿 */
+@media (max-width: 768px) {
+    .store-info-title {
+        font-size: 24px;
+    }
+
+    .store-info-main {
+        .store-map {
+            height: 480px;
+            min-height: 480px;
+        }
+    }
+
+    .store-control {
+        .control-body {
+            height: min(336px, 52vh);
+            min-height: 224px;
+        }
+
+        &.is-list-closed {
+            .control-body {
+                height: 0;
+                min-height: 0;
+            }
+        }
+    }
+}
+
+/* 큰 모바일 */
+@media (max-width: 576px) {
+    .location {
+        flex-direction: column;
+        gap: 8px;
+        padding: 0 10px;
+    }
+}
+
+/* 작은 모바일 */
+@media (max-width: 480px) {}
+
+
+// .select-wrap {
+
+//     // width: 100%;
+//     width: 235px;
+//     height: 55px;
+// }
+
+// .option-item {
+//     // height: 55px;
+//     appearance: none;
+//     height: 55px;
+// }

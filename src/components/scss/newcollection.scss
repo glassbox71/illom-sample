@@ -1,0 +1,114 @@
+@use '../../variables.scss' as v;
+
+.new-collection {
+    width: 100%;
+    padding-top: 150px;
+
+    .thumbnail {
+        position: relative;
+        width: 100%;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .text-box {
+        position: absolute;
+        left: 80px;
+        top: 40%;
+        transform: translateY(-50%);
+        color: #fff;
+
+        h1 {
+            text-align: left;
+            margin: 5px 0;
+            font-size: 40px;
+        }
+
+        p {
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .btn {
+            position: absolute;
+            left: 0;
+            width: 200px;
+            height: 52px;
+            border: 1.4px solid #fff;
+            color: #fff;
+            margin: 30px 0;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            &:hover {
+                border: 1.4px solid var(--main);
+                background: var(--main);
+                color: #fff;
+            }
+        }
+    }
+}
+
+
+
+@media (max-width: 1024px) {
+    .new-collection {
+        .text-box {
+            left: 40px;
+
+            h1 {
+                font-size: 30px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .btn {
+                width: 160px;
+                height: 44px;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .new-collection {
+        .text-box {
+            // 가운데 정렬
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            h1 {
+                font-size: 18px;
+                text-align: center;
+            }
+
+            p {
+                font-size: 12px;
+                text-align: center;
+            }
+
+            .btn {
+                position: static; // absolute 해제
+                width: 130px;
+                height: 38px;
+                font-size: 12px;
+                margin: 16px 0 0;
+            }
+        }
+    }
+}

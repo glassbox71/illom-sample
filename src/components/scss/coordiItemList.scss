@@ -1,0 +1,132 @@
+.coordi-item-list-wrap {
+    margin-top: 40px;
+}
+
+.coordi-item-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+    gap: 24px;
+}
+
+.coordi-item {
+    display: block;
+    color: #303030;
+    text-decoration: none;
+
+    .coordi-item-img-box {
+        position: relative;
+        display: block;
+        width: 100%;
+        max-width: 220px;
+        aspect-ratio: 1 / 1;
+        margin: 0 auto 16px;
+    }
+
+    .coordi-item-img {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: opacity 0.25s ease;
+    }
+
+    .coordi-item-img-default {
+        opacity: 1;
+    }
+
+    .coordi-item-img-hover {
+        opacity: 0;
+    }
+
+    margin-top: 30px;
+
+    .name {
+        font-weight: 500;
+    }
+
+    .subName {
+        width: 200px;
+        margin: 0 auto;
+        padding: 10px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .price {
+        font-size: 16px;
+        color: #CA1230;
+        padding-top: 8px;
+    }
+
+    &:hover {
+        .coordi-item-img-default {
+            opacity: 0;
+        }
+
+        .coordi-item-img-hover {
+            opacity: 1;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .coordi-item-list {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+
+    .coordi-item {
+        margin-top: 20px;
+
+        .coordi-item-img-box {
+            max-width: 180px;
+        }
+
+        .subName {
+            width: 100%;
+        }
+
+        .price {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .coordi-item-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .coordi-item {
+        margin-top: 12px;
+
+        .coordi-item-img-box {
+            max-width: 100%;
+            margin-bottom: 8px;
+        }
+
+        .name {
+            font-size: 12px;
+        }
+
+        .subName {
+            width: 100%;
+            font-size: 12px;
+            padding: 6px 0;
+        }
+
+        .price {
+            font-size: 12px;
+            padding-top: 4px;
+        }
+    }
+}

@@ -1,0 +1,192 @@
+@use '../../variables.scss' as v;
+
+.magazine {
+    .inner {
+        max-width: 1440px;
+        margin: 0 auto;
+        text-align: center;
+
+        .title-box {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+
+            h2 {
+                font-size: 42px;
+                color: var(--main);
+            }
+
+            p {
+                font-size: 23px;
+                color: var(--sub);
+            }
+        }
+
+        .magazine-box {
+            width: 100%;
+            display: flex;
+            gap: 28px;
+        }
+
+        .magazine-card {
+            position: relative;
+            width: calc((100% - 56px) / 3);
+            overflow: hidden;
+            flex-shrink: 0;
+
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+
+            &.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            .text-box {
+                width: calc(100% - 40px);
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 40px;
+                color: #fff;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                z-index: 2;
+
+                h4 {
+                    font-size: 16px;
+                }
+
+                h2 {
+                    font-size: 32px;
+                    line-height: 1.3;
+                }
+
+                p {
+                    font-size: 14px;
+                    line-height: 1.5;
+                    min-height: 20px;
+                }
+
+                .story-button {
+                    display: block;
+                    width: 100%;
+                    margin-top: 8px;
+                    background: transparent;
+                    color: #fff;
+                    padding: 14px 0;
+                    border: 1px solid #fff;
+                    font-size: 14px;
+                    font-weight: 600;
+                    text-align: center;
+                    box-sizing: border-box;
+                    text-decoration: none;
+                    transition: 0.3s;
+
+                    &:hover {
+                        background: var(--main);
+                        color: #fff;
+                        border: 1px solid var(--main);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .magazine {
+        .inner {
+            max-width: 100%;
+            padding: 0 20px;
+
+            .title-box {
+                h2 {
+                    font-size: 32px;
+                }
+
+                p {
+                    font-size: 18px;
+                }
+            }
+
+            .magazine-box {
+                gap: 16px;
+            }
+
+            .magazine-card {
+                .text-box {
+                    h2 {
+                        font-size: 22px;
+                    }
+
+                    h4 {
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .magazine {
+        .inner {
+            padding: 0 16px;
+
+            .title-box {
+                h2 {
+                    font-size: 24px;
+                }
+
+                p {
+                    font-size: 14px;
+                }
+            }
+
+            .magazine-box {
+                gap: 8px; // 간격 좁게
+            }
+
+            .magazine-card {
+                width: calc((100% - 16px) / 3); // 3칸 유지
+
+                .text-box {
+                    width: calc(100% - 12px);
+                    bottom: 8px;
+                    gap: 4px;
+
+                    h4 {
+                        font-size: 9px;
+                    }
+
+                    h2 {
+                        font-size: 11px;
+                        line-height: 1.2;
+                    }
+
+                    p {
+                        display: none;
+                    }
+
+                    // 모바일에서 본문 숨김
+
+                    .story-button {
+                        padding: 6px 0;
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

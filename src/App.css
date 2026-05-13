@@ -1,0 +1,13 @@
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.sub-page-wrap {
+  padding-top: 60px;
+  text-align: center;
+}
+
+section {
+  padding: 0px 0;
+}

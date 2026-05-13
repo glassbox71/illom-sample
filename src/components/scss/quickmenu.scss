@@ -1,0 +1,477 @@
+.quick-menu-wrap {
+    position: fixed;
+    right: 70px;
+    bottom: 50px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.quick-btn {
+    display: block;
+    width: 80px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    line-height: 0;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+
+    img {
+        display: block;
+        width: 100%;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+}
+
+.recent-view-hover-area {
+    position: relative;
+    width: 80px;
+    height: 110px;
+}
+
+.recent-view-box {
+    position: absolute;
+    right: 0;
+    width: 528px;
+    height: 110px;
+    pointer-events: none;
+
+    &:hover {
+        pointer-events: auto;
+    }
+}
+
+.recent-view-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    text-align: right;
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.recent-view-list {
+    position: absolute;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+.recent-view-list li {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    list-style: none;
+}
+
+.recent-view-item {
+    display: block;
+    width: 80px;
+    height: 80px;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 50%;
+        background: #f8f8f8;
+    }
+}
+
+.recent-view-list li:nth-child(1) {
+    z-index: 5;
+    pointer-events: auto;
+}
+
+.recent-view-list li:nth-child(2) {
+    z-index: 4;
+}
+
+.recent-view-list li:nth-child(3) {
+    z-index: 3;
+}
+
+.recent-view-list li:nth-child(4) {
+    z-index: 2;
+}
+
+.recent-view-list li:nth-child(5) {
+    z-index: 1;
+}
+
+.recent-view-list li:nth-child(n + 2) {
+    .recent-view-item {
+        opacity: 0;
+        transform: translateX(0) translateY(0);
+        pointer-events: none;
+    }
+}
+
+.recent-view-box:hover .recent-view-list li:nth-child(2) .recent-view-item {
+    opacity: 1;
+    transform: translateX(-88px) translateY(0);
+    pointer-events: auto;
+}
+
+.recent-view-box:hover .recent-view-list li:nth-child(3) .recent-view-item {
+    opacity: 1;
+    transform: translateX(-176px) translateY(0);
+    pointer-events: auto;
+}
+
+.recent-view-box:hover .recent-view-list li:nth-child(4) .recent-view-item {
+    opacity: 1;
+    transform: translateX(-264px) translateY(0);
+    pointer-events: auto;
+}
+
+.recent-view-box:hover .recent-view-list li:nth-child(5) .recent-view-item {
+    opacity: 1;
+    transform: translateX(-352px) translateY(0);
+    pointer-events: auto;
+}
+
+.recent-view-box:hover .recent-view-list li:nth-child(2) .recent-view-item:hover {
+    transform: translateX(-88px) translateY(-4px);
+}
+
+.recent-view-box:hover .recent-view-list li:nth-child(3) .recent-view-item:hover {
+    transform: translateX(-176px) translateY(-4px);
+}
+
+.recent-view-box:hover .recent-view-list li:nth-child(4) .recent-view-item:hover {
+    transform: translateX(-264px) translateY(-4px);
+}
+
+.recent-view-box:hover .recent-view-list li:nth-child(5) .recent-view-item:hover {
+    transform: translateX(-352px) translateY(-4px);
+}
+
+.recent-view-list li:nth-child(1) .recent-view-item:hover {
+    transform: translateY(-4px);
+}
+
+.recent-empty {
+    width: 80px;
+    height: 80px;
+    font-size: 11px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.chatbot-panel {
+    position: fixed;
+    right: 100px;
+    bottom: 40px;
+    width: 360px;
+    height: 520px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chatbot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid #eee;
+    background: #f8f8f8;
+
+    h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .chatbot-close {
+        border: none;
+        background: transparent;
+        font-size: 24px;
+        cursor: pointer;
+        line-height: 1;
+    }
+}
+
+.chatbot-body {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chatbot-message {
+    max-width: 80%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-word;
+
+    &.bot {
+        align-self: flex-start;
+        background: #f1f1f1;
+        color: #222;
+    }
+
+    &.user {
+        align-self: flex-end;
+        background: #111;
+        color: #fff;
+    }
+}
+
+.chatbot-input-wrap {
+    display: flex;
+    gap: 8px;
+    padding: 14px;
+    border-top: 1px solid #eee;
+    background: #fff;
+
+    input {
+        flex: 1;
+        height: 44px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 0 14px;
+        font-size: 14px;
+        outline: none;
+    }
+
+    button {
+        width: 64px;
+        border: none;
+        background: #111;
+        color: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+    }
+}
+
+.chatbot-quick-btns {
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: #f8f8f8;
+    border-radius: 12px;
+}
+
+.chatbot-quick-label {
+    font-size: 11px;
+    color: #aaa;
+    margin: 0 0 8px;
+    font-weight: 500;
+}
+
+.chatbot-quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.chatbot-quick-btn {
+    padding: 8px 10px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #333;
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.4;
+    transition: all 0.2s;
+
+    &:hover {
+        background: #111;
+        color: #fff;
+        border-color: #111;
+    }
+}
+
+.chatbot-typing {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    height: 16px;
+
+    span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #bbb;
+        animation: typingDot 1.2s infinite;
+
+        &:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        &:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    }
+}
+
+@keyframes typingDot {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0.7);
+        opacity: 0.4;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+// ─── 추천 상품 카드 (추가된 부분) ────────────────────────────────────────────
+.chatbot-product-cards {
+    padding: 4px 0;
+
+    .chatbot-product-label {
+        font-size: 11px;
+        color: #aaa;
+        margin: 0 0 6px;
+        font-weight: 500;
+    }
+
+    .chatbot-product-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #eee;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 6px;
+        text-decoration: none;
+        color: inherit;
+        background: #fff;
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+
+        &:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .chatbot-product-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .chatbot-product-series {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .chatbot-product-name {
+            font-size: 13px;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .chatbot-product-bottom {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .chatbot-product-price {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .chatbot-product-tag {
+            font-size: 10px;
+            background: #222;
+            color: #fff;
+            border-radius: 4px;
+            padding: 2px 5px;
+        }
+
+        .chatbot-product-arrow {
+            color: #bbb;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .quick-menu-wrap {
+        right: 16px;
+        bottom: 120px;
+        gap: 6px;
+    }
+
+    .quick-btn {
+        width: 80px;
+    }
+
+    .recent-view-hover-area {
+        display: none;
+    }
+}
+
+// 챗봇 마크다운 
+.chatbot-message.bot {
+    p {
+        margin: 0 0 6px;
+        &:last-child { margin-bottom: 0; }
+    }
+
+    ul, ol {
+        margin: 4px 0;
+        padding-left: 16px;
+
+        li {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+    }
+
+    strong {
+        font-weight: 700;
+        color: #111;
+    }
+}
