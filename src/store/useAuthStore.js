@@ -38,6 +38,13 @@ export const useAuthStore = create((set, get) => ({
                 await useProductStore.getState().fetchOrderList({ uid: u.uid });
                 await useProductStore.getState().fetchCartItems({ uid: u.uid });
 
+                // 포인트 로드 — Firebase에 없으면 1000P 기본값
+                const { useUserAssetStore } = await import('./useUserAssetStore');
+                const savedPoint = userInfo?.iloomPoint
+                useUserAssetStore.getState().setPoint(
+                    typeof savedPoint === 'number' ? savedPoint : 1000
+                )
+
             } else {
                 const socialUid = localStorage.getItem("social_uid");
                 const socialProvider = localStorage.getItem("social_provider");
@@ -120,6 +127,7 @@ export const useAuthStore = create((set, get) => ({
             const { useProductStore } = await import('./useProductStore');
             await useProductStore.getState().fetchOrderList({ uid: u.uid });
             await useProductStore.getState().fetchCartItems({ uid: u.uid });
+            toast(`${u.displayName}님, 로그인 성공!`);
             return true;
         } catch (err) {
             toast("로그인 실패" + err.message)
@@ -138,6 +146,7 @@ export const useAuthStore = create((set, get) => ({
         useProductStore.getState().clearWishlist();
         useCustomWishStore.getState().clearWishFolders();
         set({ user: null })
+        toast("로그아웃 되셨습니다.")
     },
 
     // 구글 로그인
@@ -188,6 +197,7 @@ export const useAuthStore = create((set, get) => ({
             const { useProductStore } = await import('./useProductStore');
             await useProductStore.getState().fetchOrderList({ uid: user.uid });
             await useProductStore.getState().fetchCartItems({ uid: user.uid });
+            toast(`${user.displayName}님, 로그인 성공!`);
             return true;
         } catch (err) {
             toast(err.message);
@@ -336,7 +346,7 @@ export const useAuthStore = create((set, get) => ({
             const { useProductStore } = await import('./useProductStore');
             await useProductStore.getState().fetchOrderList({ uid: productOwnerUid });
             await useProductStore.getState().fetchCartItems({ uid: productOwnerUid });
-
+            toast(`${naverUser.nickname}님, 로그인 성공!`)
             return true
         } catch (err) {
             console.error('네이버 콜백 오류:', err);
