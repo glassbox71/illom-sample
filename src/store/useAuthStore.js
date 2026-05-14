@@ -290,8 +290,8 @@ export const useAuthStore = create((set, get) => ({
     // 네이버 로그인
     onNaverLogin: () => {
         const clientId = import.meta.env.VITE_NAVER_CLIENT_ID;
-        // const callbackUrl = encodeURIComponent(import.meta.env.VITE_NAVER_CALLBACK_URL);
-         const callbackUrl =import.meta.env.VITE_NAVER_CALLBACK_URL;
+        const callbackUrl = encodeURIComponent(import.meta.env.VITE_NAVER_CALLBACK_URL);
+        
         const state = Math.random().toString(36).substring(2);
 
         const url = `https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=${clientId}&redirect_uri=${callbackUrl}&state=${state}`;
