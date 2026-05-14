@@ -291,7 +291,7 @@ export const useAuthStore = create((set, get) => ({
     onNaverLogin: () => {
         const clientId = import.meta.env.VITE_NAVER_CLIENT_ID;
         const callbackUrl = encodeURIComponent(import.meta.env.VITE_NAVER_CALLBACK_URL);
-        
+
         const state = Math.random().toString(36).substring(2);
 
         const url = `https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=${clientId}&redirect_uri=${callbackUrl}&state=${state}`;
@@ -300,9 +300,15 @@ export const useAuthStore = create((set, get) => ({
 
     onNaverCallback: async (accessToken) => {
         try {
-            const res = await fetch(`/naver-api/v1/nid/me`, {
-                headers: { Authorization: `Bearer ${accessToken}` },
+            // const res = await fetch(`/naver-api/v1/nid/me`, {
+            //     headers: { Authorization: `Bearer ${accessToken}` },
+            // });
+            const res = await fetch(`/.netlify/functions/naver-user`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
             });
+
             const data = await res.json();
             const profile = data.response;
 
